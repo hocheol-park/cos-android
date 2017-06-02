@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">COS System</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="order">Order</string>
+    <string name="monitor_progress">My Menu</string>
+    <string name="manage_order_list">Order List</string>
+    <string name="manage_menu">Manage menu</string>
+
+</resources>

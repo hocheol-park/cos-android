@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Customer">
+        <menu>
+            <item
+                android:id="@+id/nav_order"
+                android:icon="@drawable/icon_coffee"
+                android:title="@string/order" />
+            <item
+                android:id="@+id/nav_gallery"
+                android:icon="@android:drawable/ic_menu_view"
+                android:title="@string/monitor_progress" />
+        </menu>
+    </item>
+
+    <item android:title="Barista">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@android:drawable/ic_menu_edit"
+                android:title="@string/manage_order_list" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@android:drawable/ic_menu_sort_by_size"
+                android:title="@string/manage_menu" />
+        </menu>
+    </item>
+
+</menu>
