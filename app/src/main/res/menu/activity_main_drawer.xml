@@ -8,7 +8,7 @@
                 android:icon="@drawable/icon_coffee"
                 android:title="@string/order" />
             <item
-                android:id="@+id/nav_gallery"
+                android:id="@+id/nav_mymenu"
                 android:icon="@android:drawable/ic_menu_view"
                 android:title="@string/monitor_progress" />
         </menu>
@@ -17,11 +17,11 @@
     <item android:title="Barista">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_order_list"
                 android:icon="@android:drawable/ic_menu_edit"
                 android:title="@string/manage_order_list" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_manage_item"
                 android:icon="@android:drawable/ic_menu_sort_by_size"
                 android:title="@string/manage_menu" />
         </menu>

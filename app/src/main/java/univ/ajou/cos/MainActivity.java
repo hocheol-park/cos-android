@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,10 +20,21 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
+import univ.ajou.cos.util.HttpCallback;
+import univ.ajou.cos.util.HttpConnector;
 import univ.ajou.cos.util.PermissionListener;
+import univ.ajou.cos.util.PrefUtil;
 import univ.ajou.cos.util.TedPermission;
+
+import static univ.ajou.cos.Constant.URL_HOST;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,6 +42,10 @@ public class MainActivity extends AppCompatActivity
     private Button btnOrder;
     private Button btnMonitor;
     private TextView userName, userPhone;
+
+    private PrefUtil prefUtil;
+
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +83,18 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        btnMonitor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, MyMenuActivity.class);
+                startActivity(i);
+            }
+        });
+
         userName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.user_name);
         userPhone = (TextView) navigationView.getHeaderView(0).findViewById(R.id.user_phone);
+
+        prefUtil = new PrefUtil(this);
 
         checkPermission();
     }
@@ -114,12 +140,16 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_order) {
             Intent i = new Intent(MainActivity.this, OrderActivity.class);
             startActivity(i);
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_mymenu) {
+            Intent i = new Intent(MainActivity.this, MyMenuActivity.class);
+            startActivity(i);
+        } else if (id == R.id.nav_order_list) {
+            Intent i = new Intent(MainActivity.this, ManageOrderActivity.class);
+            startActivity(i);
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_manage_item) {
+            Intent i = new Intent(MainActivity.this, ManageItemActivity.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -187,7 +217,45 @@ public class MainActivity extends AppCompatActivity
 
     public void setUserInfo() {
 
-        userName.setText(getDeviceId());
-        userPhone.setText(getPhoneNumber());
+        String deviceId = getDeviceId();
+        String phoneNumber = getPhoneNumber();
+
+        prefUtil.setPrefDataString("DEVICE_ID", deviceId);
+        prefUtil.setPrefDataString("PHONE_NUMBER", phoneNumber);
+
+        userName.setText(deviceId);
+        userPhone.setText(phoneNumber);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("news");
+        String FCMToken = FirebaseInstanceId.getInstance().getToken();
+
+        updateUserInfo(deviceId, phoneNumber, FCMToken);
+    }
+
+    public void updateUserInfo(String uid, String unum, String token) {
+
+        HttpConnector connector = new HttpConnector(this);
+        try {
+            JSONObject params = new JSONObject();
+            params.put("mode", Constant.MODE_UPDATE_USER);
+            params.put("uid", uid);
+            params.put("unum", unum);
+            params.put("token", token);
+            connector.setParam(params);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        connector.setEndpoint(URL_HOST);
+        connector.get(new HttpCallback() {
+            @Override
+            public void onFailure(int code, String msg) {
+
+            }
+
+            @Override
+            public void onResponse(int code, String msg, String data) {
+                Log.e(TAG, "DATA : "+msg);
+            }
+        });
     }
 }

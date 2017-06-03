@@ -90,7 +90,22 @@ public class HttpConnector {
             @Override
             public void onResponse(Response response) throws IOException {
                 String res = response.body().string();
-                callback.onResponse(0, "", res);
+                //callback.onResponse(0, "", res);
+
+                Log.e("SDF", res);
+                try {
+                    JSONObject json = new JSONObject(res);
+                    int code = json.isNull("code") ? 0 : json.getInt("code");
+                    String message = json.isNull("msg") ? null : json.getString("msg");
+                    String data = json.isNull("data") ? null : json.getString("data");
+
+                    callback.onResponse(code, message, data);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    callback.onFailure(0, "Wrong Data format");
+                }
             }
         });
     }

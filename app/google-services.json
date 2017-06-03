@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "792429449580",
+    "firebase_url": "https://cos-fcm.firebaseio.com",
+    "project_id": "cos-fcm",
+    "storage_bucket": "cos-fcm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:792429449580:android:9fe7c4aee4c4c0d8",
+        "android_client_info": {
+          "package_name": "univ.ajou.cos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "792429449580-75uqocc108t5370tetfuj9pk0i58bena.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtetWtxWapaiBtaRUyB2ndH6THaZWlhrc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

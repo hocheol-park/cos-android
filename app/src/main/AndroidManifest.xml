@@ -24,11 +24,26 @@
             </intent-filter>
         </activity>
         <activity android:name=".OrderActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".MyMenuActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".ManageOrderActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".ManageItemActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".util.TedPermissionActivity"
-            android:launchMode="singleTask"
-            />
+            android:launchMode="singleTask"/>
+        <service android:name=".FirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service android:name=".FirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

@@ -11,4 +11,8 @@
     <string name="manage_order_list">Order List</string>
     <string name="manage_menu">Manage menu</string>
 
+    <string name="msg_choose_one">You must choose at least one item</string>
+    <string name="title_check_order">Item List Check</string>
+    <string name="title_add_item">Add New Item</string>
+
 </resources>
